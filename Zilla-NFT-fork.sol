@@ -12,6 +12,7 @@ contract Zilla is ERC721Enumerable, Ownable {
         "https://ipfs.io/ipfs/QmQYMSLbanR7CHtgGhBMD6RYNmWTkyPdByT2JpSNsjwtKH/";
     string hiddenURI =
         "https://ipfs.io/ipfs/QmNnz3jdhDeodePdFhEH1VzVqnjnQisngUoH4PxnpX3DqL/hidden.json";
+
     address PREMINT = 0xFc44b51003041bf8010646C07f2b31E757747359;
     address dev = 0x2F20D2cafaa1692e401791Be811700fb56f0930B;
     address admin1 = 0xB91fb18babD1b77cd628BE1841db934480c61Ad7;
@@ -72,9 +73,9 @@ contract Zilla is ERC721Enumerable, Ownable {
 
         // Payment value must be larger than the 'price'
         require(msg.value >= price, "Zilla : INCORRECT PRICE!");
-        payable(admin1).transfer(((address(this).balance) * 48) / 100);
-        payable(admin2).transfer(((address(this).balance) * 50) / 100);
-        payable(dev).transfer(((address(this).balance) * 2) / 100);
+        payable(admin1).transfer(((msg.value) * 48) / 100);
+        payable(admin2).transfer(((msg.value) * 50) / 100);
+        payable(dev).transfer(((msg.value) * 2) / 100);
         for (uint8 i = 1; i <= amount; i++)
             _safeMint(msg.sender, (totalMinted + i));
 
